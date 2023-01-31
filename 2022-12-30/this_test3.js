@@ -10,7 +10,7 @@ const helloObject = {
     }
     innerFunction();
   }
-}
+};
 
 
 //이게 가능한 이유는 화살표 함수에는 ⭐️this가 아예 없기 때문⭐️이다.
@@ -24,6 +24,7 @@ const helloObject2 = {
     }
     innerFunction();
   }
-}
+};
+
 helloObject.objectFuntion();
 helloObject2.objectFuntion();
