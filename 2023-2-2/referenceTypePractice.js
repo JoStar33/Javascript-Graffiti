@@ -11,3 +11,8 @@ let newPerson = person;
 person.name = 'jojo';
 
 console.log(newPerson);
+
+
+let objectA = {};
+let objectB = objectA;
+console.log(objectA === objectB)
