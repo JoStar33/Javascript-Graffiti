@@ -1,5 +1,4 @@
 //이렇게 고유한 id를 생성하는 제너레이터를 만들 수 있다.
-
 function* makeId() {
   let id = 1;
   while(true) {
