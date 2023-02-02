@@ -13,6 +13,15 @@ person.name = 'jojo';
 console.log(newPerson);
 
 
+//자바스크립트 객체의 이상한 특성...
+let OA = {};
+let OB = {};
+
+console.log(OA === OB);
+
+//위에 구문을 이렇게 실행한다면? 정상동작!
 let objectA = {};
+
 let objectB = objectA;
+
 console.log(objectA === objectB)
