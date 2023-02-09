@@ -21,3 +21,11 @@ Grope.prototype.mapping = (params) => {
 
 //이건 true다~~
 console.log(dav.mapping === dav2.mapping);
+
+//그럼 하나만 더 non-constructor인 코드들은 prototype을 생성할까?
+const funfun = (name) => {
+  this.name = name;
+}
+
+//!! undefined가 나왔다. 그말은 즉슨 화살표 함수는 non-constructor인셈.
+console.log(funfun.prototype)
