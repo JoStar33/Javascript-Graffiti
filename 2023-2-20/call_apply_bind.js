@@ -10,7 +10,7 @@ function introduceMySelf (age, city, like) {
   return `hello my name is ${this.name}. i'm ${age} years old. i'm leave in ${city}. i love ${like}`;
 }
 
-//콜그어배
+//배어리콜(배열 >> 어플라이, 리스트 >> 콜)
 console.log(introduceMySelf.call(jose, 27, 'gunpo', 'music'));
 console.log(introduceMySelf.apply(minsu, [29, 'dongTan', 'game']));
 
