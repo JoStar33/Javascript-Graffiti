@@ -1,0 +1,16 @@
+
+<script>
+  const fun1 = () => {
+    const fun1Data = 3;
+    const fun2 = () => {
+        const fun2Data = fun1Data + 4;
+        const fun3 = () => {
+          const fun3Data = fun2Data + 2;
+          console.log(fun3Data);
+        };
+        fun3();
+      };
+      fun2();
+  };
+  fun1();
+</script>
