@@ -12,7 +12,7 @@ console.log(symbolData === symbolReference);
 
 
 
-//그럼 이경우는 어떨까? 아래와 같은 구문을 한번 보자. 두 심볼값은 동일한 상태이다. 그럼 비교시에 어떤결과가 나올까~?
+//그럼 이경우는 어떨까? 아래와 같은 구문을 한번 보자. 두 심볼값은 동일한 상태이다. 그럼 비교시에 어떤 결과가 나올까~?
 const symbolData1 = Symbol('hello, symbol');
 const symbolData2 = Symbol('hello, symbol');
 //결과는 바로 false! symbol을 사용하면 심볼만의 유일한 값이 생기게 되는거다.
