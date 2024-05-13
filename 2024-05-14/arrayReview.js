@@ -17,3 +17,23 @@ console.log(
     [5, 6].find((exceptElement) => exceptElement !== element)
   )
 );
+
+const objectTest = {
+  a: 1,
+  b: 2,
+  c: 3,
+};
+
+for (let objectKey in objectTest) {
+  console.log(objectKey);
+}
+
+// 에러발생! 객체내에 for of는 사용금지.
+for (let objectKey of objectTest) {
+  console.log(objectKey);
+}
+
+// 근데 또 이건됨ㅋ 왜냐하면 배열은 객체니까!
+for (let objectKey in array) {
+  console.log(objectKey);
+}
