@@ -1,5 +1,9 @@
 import { fetchUserInfo } from "./api/user.js";
-import { userInfoDisplayer, consoleInfoDisplayer } from "./displayer.js";
+import {
+  userInfoDisplayer,
+  consoleInfoDisplayer,
+  findPersonInfoDisplayer,
+} from "./displayer.js";
 import readline from "readline";
 
 const rl = readline.createInterface({
@@ -24,6 +28,7 @@ const rl = readline.createInterface({
  * @type { userArrayElement[] }
  */
 let userArray = [];
+let inputModeInfo = -1;
 
 const main = async () => {
   const userInfo = await fetchUserInfo();
@@ -37,14 +42,35 @@ const main = async () => {
   userArray = parsedUserInfo;
 };
 
+const findPerson = (line) => {
+  const filteredUsers = userArray.filter((user) => user.name.includes(line));
+  userInfoDisplayer(filteredUsers);
+  findPersonInfoDisplayer();
+};
+
 await main();
 userInfoDisplayer(userArray);
 consoleInfoDisplayer();
 
 rl.on("line", (line) => {
   const numberLine = parseInt(line);
+  if (inputModeInfo === 1 && numberLine === 0) {
+    userInfoDisplayer(userArray);
+    consoleInfoDisplayer();
+    inputModeInfo = -1;
+    return;
+  }
+  if (inputModeInfo === 1) {
+    findPerson(line);
+    return;
+  }
   if (isNaN(numberLine)) {
     console.log("숫자만 입력 가능합니다!");
+    return;
+  }
+  if (numberLine === 1) {
+    findPersonInfoDisplayer();
+    inputModeInfo = 1;
     return;
   }
   if (numberLine === 0) {
