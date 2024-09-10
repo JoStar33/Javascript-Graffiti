@@ -1,10 +1,23 @@
 const land = [
-  [0, 0, 0, 1, 1, 1, 0, 0],
-  [0, 0, 0, 0, 1, 1, 0, 0],
-  [1, 1, 0, 0, 0, 1, 1, 0],
-  [1, 1, 1, 0, 0, 0, 0, 0],
-  [1, 1, 1, 0, 0, 0, 1, 1],
+  [1, 0, 1, 0, 1, 1],
+  [1, 0, 1, 0, 0, 0],
+  [1, 0, 1, 0, 0, 1],
+  [1, 0, 0, 1, 0, 0],
+  [1, 0, 0, 1, 0, 1],
+  [1, 0, 0, 0, 0, 0],
+  [1, 1, 1, 1, 1, 1],
 ];
+
+const generateRandomString = (num) => {
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+  let result = "";
+  const charactersLength = characters.length;
+  for (let i = 0; i < num; i++) {
+    result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  }
+
+  return result;
+};
 
 const earthMakeStar = (lineIndex, earthIndex, land, pointSaver) => {
   land[lineIndex][earthIndex] = "*";
@@ -31,23 +44,40 @@ function solution(land) {
   land.forEach((line, lineIndex) => {
     line.forEach((earth, earthIndex) => {
       if (earth === 1) {
+        let randomStr = generateRandomString(10);
         earthMakeStar(lineIndex, earthIndex, land, pointSaver);
         pointSaver.forEach((pointElement) => {
-          land[pointElement[0]][pointElement[1]] = pointSaver.length;
+          land[pointElement[0]][pointElement[1]] = {
+            key: randomStr,
+            value: pointSaver.length,
+          };
         });
         pointSaver = [];
       }
     });
   });
-  console.log(land);
+  const earthLineLength = land[0].length;
+  let oilKeeper = [];
+  let answer = 0;
+  for (let earthLine = 0; earthLine < earthLineLength; earthLine++) {
+    land.forEach((line) => {
+      const currentLineOil = line[earthLine];
+      if (
+        !oilKeeper.find((element) => element.key === currentLineOil.key) &&
+        currentLineOil !== 0
+      ) {
+        oilKeeper.push(line[earthLine]);
+      }
+      const sumOil = oilKeeper.reduce((a, b) => {
+        return a + b.value;
+      }, 0);
+      if (answer < sumOil) {
+        answer = sumOil;
+      }
+    });
+    oilKeeper = [];
+  }
+  return answer;
 }
 
-solution(land);
-
-const test = [
-  [0, 0, 0, 3, 3, 3, 0, 0],
-  [0, 0, 0, 0, 3, 3, 0, 0],
-  [8, 8, 0, 0, 0, 3, 1, 0],
-  [8, 8, 8, 0, 0, 0, 0, 0],
-  [8, 8, 8, 0, 0, 0, 2, 2],
-];
+console.log(solution(land));
